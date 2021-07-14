@@ -1,7 +1,7 @@
 ## Usage
 ```http request
 create pokemon:
-localhost:8080/uncaught
+localhost:8080/create
  {
         "name": "Blaziken",
         "type":"Fire",
