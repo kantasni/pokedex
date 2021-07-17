@@ -9,10 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 
@@ -26,12 +23,12 @@ public class PokemonController {
         return pokeservice.fetchAllByCaught(false);
     }
 
-    @GetMapping(value = "/create")
+    @PostMapping(value = "/create")
     public void createPokemon(@RequestBody Pokemon pokemon) {
         pokeservice.addPokemon(pokemon);
     }
 
-    @GetMapping(value = "/catch")
+    @PostMapping(value = "/catch")
     public PokemonBooleanResponse catchPokemon(@RequestBody Pokemon pokemon) {return new PokemonBooleanResponse(pokeservice.catchReleasePokemon(pokemon.getName(), true));}
 
     @GetMapping(value = "/caught")
@@ -39,7 +36,7 @@ public class PokemonController {
         return pokeservice.fetchAllByCaught(true);
     }
 
-    @GetMapping(value = "/release")
+    @PostMapping(value = "/release")
     public PokemonBooleanResponse releasePokemon(@RequestBody Pokemon pokemon) {return  new PokemonBooleanResponse(pokeservice.catchReleasePokemon(pokemon.getName(), false));}
 
 
