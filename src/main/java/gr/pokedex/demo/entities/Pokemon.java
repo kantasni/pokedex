@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -27,8 +28,9 @@ public class Pokemon {
     @Column
     private String name;
 
-    @Column
-    private String type;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @Size(min=1, max=2)
+    private List<Type> types;
 
     @Column
     private boolean caught;

@@ -1,14 +1,12 @@
 package gr.pokedex.demo.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Moves")
@@ -23,8 +21,9 @@ public class Move {
     @Column
     private String name;
 
-    @Column
-    private String type;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @Size(min=1, max=1)
+    private Type type;
 
     @ManyToOne
     private Pokemon pokemon;

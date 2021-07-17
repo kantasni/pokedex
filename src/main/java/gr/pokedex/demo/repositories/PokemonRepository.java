@@ -12,4 +12,6 @@ public interface PokemonRepository extends JpaRepository<Pokemon, Long> {
     public Pokemon findByCaught(boolean caught);
 
     public List<Pokemon> findAllByCaught(boolean caught);
+
+    public Pokemon findByName(String name);
 }
