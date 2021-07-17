@@ -5,6 +5,7 @@ import java.util.List;
 import gr.pokedex.demo.entities.Pokemon;
 import gr.pokedex.demo.repositories.PokemonRepository;
 import gr.pokedex.demo.services.PokemonService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,10 +29,15 @@ public class PokemonController {
     }
 
     @GetMapping(value = "/catch")
-    public boolean catchPokemon(@RequestBody String name) {return pokeservice.catchPokemon(name); }
+    public PokemonBooleanResponse catchPokemon(@RequestBody String name) {return new PokemonBooleanResponse(pokeservice.catchPokemon(name)); }
 
     @GetMapping(value = "/caught")
     public  List<Pokemon> getCaught() {
         return pokeservice.fetchAllByCaught(true);
+    }
+
+    @AllArgsConstructor
+    public static class PokemonBooleanResponse{
+        private boolean response;
     }
 }
