@@ -14,15 +14,11 @@ public class PokemonService {
     @Autowired
     private PokemonRepository pokemonRepository;
 
-    public boolean catchPokemon(String pokemonName) {
-        Random rd = new Random();
+    public boolean catchReleasePokemon(String pokemonName, boolean catchRelease) {
 
-        if(rd.nextBoolean()) {
-            Pokemon caughtPokemon = pokemonRepository.findByName(pokemonName);
-            caughtPokemon.setCaught(true);
-            return pokemonRepository.save(caughtPokemon)!=null;
-        }
-        return false;
+        Pokemon pokemon = pokemonRepository.findByName(pokemonName);
+        pokemon.setCaught(catchRelease);
+        return pokemonRepository.save(pokemon)!=null;
     }
 
     public List<Pokemon> fetchAllByCaught(boolean areCaught) {
