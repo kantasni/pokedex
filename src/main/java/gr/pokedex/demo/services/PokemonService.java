@@ -29,4 +29,12 @@ public class PokemonService {
         pokemonRepository.save(pokemon);
     }
 
+    public void deletePokemon(String pokemonName){
+        Pokemon pokemon = pokemonRepository.findByName(pokemonName);
+        pokemonRepository.deleteById(pokemon.getId());
+    }
+
+    public void deleteAll(){
+        pokemonRepository.deleteAll();
+    }
 }

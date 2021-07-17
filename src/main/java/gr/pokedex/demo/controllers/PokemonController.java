@@ -39,6 +39,15 @@ public class PokemonController {
     @PostMapping(value = "/release")
     public PokemonBooleanResponse releasePokemon(@RequestBody Pokemon pokemon) {return  new PokemonBooleanResponse(pokeservice.catchReleasePokemon(pokemon.getName(), false));}
 
+    @GetMapping(value = "/deletePokemon/{pokemonName}")
+    public void deletePokemon(@PathVariable String pokemonName){
+        pokeservice.deletePokemon(pokemonName);
+    }
+
+    @GetMapping(value = "/deleteEverything")
+    public void deleteEverything(){
+        pokeservice.deleteAll();
+    }
 
     @AllArgsConstructor
     @Setter
