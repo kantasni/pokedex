@@ -2,10 +2,14 @@ package gr.pokedex.demo.controllers;
 
 import gr.pokedex.demo.entities.PokemonImage;
 import gr.pokedex.demo.repositories.ImageRepository;
+import gr.pokedex.demo.services.ImageService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,25 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 public class ImageController {
 
     @Autowired
-    private ImageRepository imageRepository;
+    private ImageService imageService;
 
     @SneakyThrows
-    @PostMapping("/upload")
-    public void uploadImage(@RequestBody MultipartFile file){
+    @PostMapping("/upload/{pokemonName}")
+    public void uploadImage(@RequestBody MultipartFile file,@PathVariable String pokemonName){
         PokemonImage pokemonImage = new PokemonImage();
-        pokemonImage.setName("Blaziken.jpg");
+        pokemonImage.setName(pokemonName+".jpg");
         pokemonImage.setImage(file.getBytes());
-        imageRepository.save(pokemonImage);
-
-        System.out.println();
-    }
-
-    @SneakyThrows
-    @PostMapping("/download")
-    public PokemonImage downloadImage(){
-        PokemonImage byName = imageRepository.findByName("Blaziken.jpg");
-
-        return byName;
-
+        imageService.pokemonSaveImage(pokemonName,pokemonImage);
     }
 }

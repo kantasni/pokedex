@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -37,4 +38,7 @@ public class Pokemon {
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Move> moves;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private PokemonImage image;
 }

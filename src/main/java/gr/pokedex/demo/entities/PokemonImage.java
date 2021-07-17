@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -25,4 +26,7 @@ public class PokemonImage {
 
     @Lob
     private byte[] image;
+
+    @OneToOne
+    private Pokemon pokemon;
 }
