@@ -29,9 +29,8 @@ public class Pokemon {
     @Column
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @Size(min=1, max=2)
-    private List<Type> types;
+    @Column
+    private String type;
 
     @Column
     private boolean caught;
