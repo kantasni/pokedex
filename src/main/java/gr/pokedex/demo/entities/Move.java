@@ -21,9 +21,8 @@ public class Move {
     @Column
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @Size(min=1, max=1)
-    private Type type;
+    @Column
+    String type;
 
     @ManyToOne
     private Pokemon pokemon;
