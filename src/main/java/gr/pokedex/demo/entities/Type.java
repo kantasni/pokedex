@@ -23,8 +23,8 @@ public class Type {
     private String name;
 
     @Column
-    private String major_adv;
+    private String majorAdv;
 
     @Column
-    private String major_dis;
+    private String majorDis;
 }
