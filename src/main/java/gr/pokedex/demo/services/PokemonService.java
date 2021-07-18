@@ -5,17 +5,36 @@ import gr.pokedex.demo.repositories.PokemonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Random;
+
 @Service
 public class PokemonService {
 
     @Autowired
     private PokemonRepository pokemonRepository;
 
-    public void catchPokemon(String pokemonName) {
-        Pokemon caughtPokemon = pokemonRepository.findByName(pokemonName);
-        caughtPokemon.setCaught(true);
+    public boolean catchReleasePokemon(String pokemonName, boolean catchRelease) {
 
-        Pokemon save = pokemonRepository.save(caughtPokemon);
+        Pokemon pokemon = pokemonRepository.findByName(pokemonName);
+        pokemon.setCaught(catchRelease);
+        return pokemonRepository.save(pokemon)!=null;
     }
-//    TODO: create methods for /uncaught, /create and /caught
+
+    public List<Pokemon> fetchAllByCaught(boolean areCaught) {
+        return pokemonRepository.findAllByCaught(areCaught);
+    }
+
+    public void addPokemon(Pokemon pokemon){
+        pokemonRepository.save(pokemon);
+    }
+
+    public void deletePokemon(String pokemonName){
+        Pokemon pokemon = pokemonRepository.findByName(pokemonName);
+        pokemonRepository.deleteById(pokemon.getId());
+    }
+
+    public void deleteAll(){
+        pokemonRepository.deleteAll();
+    }
 }
