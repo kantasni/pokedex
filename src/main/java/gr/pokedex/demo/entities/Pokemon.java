@@ -29,7 +29,6 @@ public class Pokemon {
     @Column
     private String name;
 
-
     @Column
     private String type;
 
